@@ -12,9 +12,6 @@ class ParserUtils():
 
         main_df = pd.merge(inversor_df, meteo_df, how='inner', left_on='Data', right_on='Fecha')
         
-        # Eliminar fecha? 
-        # main_df = main_df.drop('Fecha', axis=1)
-
         # Mover fecha al principio
         temp_cols=main_df.columns.tolist()
         index=main_df.columns.get_loc("Fecha")
@@ -90,21 +87,6 @@ class ParserUtils():
             meteo_df = pd.read_csv(meteo_path)
             meteo_df = meteo_df.drop('Instalación', axis=1)
             return meteo_df
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
 
     @staticmethod
     def get_full_dataframe_memory(inversor_num: int, month: int, year: int): 
@@ -113,9 +95,6 @@ class ParserUtils():
 
         main_df = pd.merge(inversor_df, meteo_df, how='inner', left_on='Data', right_on='Fecha')
         
-        # Eliminar fecha? 
-        # main_df = main_df.drop('Fecha', axis=1)
-
         # Mover fecha al principio
         temp_cols=main_df.columns.tolist()
         index=main_df.columns.get_loc("Data")
@@ -148,20 +127,10 @@ class ParserUtils():
             inversor_df_7 = pd.read_csv(inversor_path_7, parse_dates=['Data'], date_parser=custom_date_parser)
             inversor_df = pd.concat([inversor_df_1, inversor_df_2, inversor_df_3, inversor_df_4, inversor_df_5, inversor_df_7])
             inversor_df = inversor_df.drop('Inversor', axis=1)
-            # inversor_df = inversor_df.drop('Current AC(A)/Phase 1', axis=1)
-            # inversor_df = inversor_df.drop('Current AC(A)/Phase 2', axis=1)
-            # inversor_df = inversor_df.drop('Current AC(A)/Phase 3', axis=1)
-            # inversor_df = inversor_df.drop('Voltage DC(V)', axis=1)
-            # inversor_df = inversor_df.drop('Current DC(A)', axis=1)
         else:
             inversor_path = os.getcwd() + '/data/csv/inversor' + str(inversor_num) + '.csv'
             inversor_df = pd.read_csv(inversor_path, parse_dates=['Data'], date_parser=custom_date_parser)
             inversor_df = inversor_df.drop('Inversor', axis=1)
-            # inversor_df = inversor_df.drop('Current AC(A)/Phase 1', axis=1)
-            # inversor_df = inversor_df.drop('Current AC(A)/Phase 2', axis=1)
-            # inversor_df = inversor_df.drop('Current AC(A)/Phase 3', axis=1)
-            # inversor_df = inversor_df.drop('Voltage DC(V)', axis=1)
-            # inversor_df = inversor_df.drop('Current DC(A)', axis=1)
         
         if (month == None and year == None):
             return inversor_df
@@ -172,7 +141,6 @@ class ParserUtils():
             if(len(month_str) == 1):
                 month_str = '0' + month_str
 
-            # inversor_df = inversor_df[inversor_df['Data'].str.contains(month_str + '/' + str(year), na=False)]
             inversor_df = inversor_df[(inversor_df['Data'].dt.month == month) & (inversor_df['Data'].dt.year == year)]            
             return inversor_df
 
