@@ -77,7 +77,6 @@ class DataFrameUtils():
         for i in range(len(X)-lookback-1):
             t = []
             for j in range(1,lookback+1):
-                # Gather past records upto the lookback period
                 t.append(X[[(i+j+1)], :])
             output_X.append(t)
             output_y.append(y[i+lookback+1])
@@ -86,23 +85,3 @@ class DataFrameUtils():
     @staticmethod
     def detemporalize(output_X):
         return output_X[:, 0, :]
-
-    @staticmethod
-    def train_test_split_memory(dataframe: pd.DataFrame, test_size: float):
-        train_df, test_df = train_test_split(dataframe, test_size=test_size)
-        # Eliminar estados erróneos del dataframe de entreno
-        test_df = pd.concat([test_df, \
-            train_df[train_df.Estado == DataFrameClassification.INVERSOR_ERROR], \
-            train_df[train_df.Estado == DataFrameClassification.ALTERNA_ERROR]])
-        train_df = train_df[train_df['Estado'] == DataFrameClassification.INVERSOR_OK]
-        # Ordenar por fecha
-        train_df = train_df.sort_values('Data')
-        test_df = test_df.sort_values('Data')
-
-        train_df = train_df.drop('Data', axis=1)
-        test_df = test_df.drop('Data', axis=1)
-
-        # train_df = train_df.drop('Fecha', axis=1)
-        # test_df = test_df.drop('Fecha', axis=1)
-
-        return train_df, test_df

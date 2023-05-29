@@ -7,8 +7,6 @@ class DataVisualization():
     def training_test_loss(history):
         plt.plot(history.history['loss'], label='Training set loss')
         plt.plot(history.history['val_loss'], label='Test set loss',  color='r')
-        # plt.set_xlabel('epochs')
-        # plt.set_ylabel('loss')
         plt.legend(['Training set loss', 'Test set loss'])
 
     @staticmethod
