@@ -23,6 +23,3 @@ This project is focused on anomaly detection in photovoltaic inverter data using
 1. **Install dependencies**: Make sure you have Python 3.x and install required packages (e.g., pandas, numpy, scikit-learn, matplotlib, tensorflow, keras).
 2. **Prepare data**: Place your inverter and meteorological CSV files in the expected `data/csv/` directory structure.
 3. **Run experiments**: Open the desired Jupyter notebook in the `experiment1`, `experiment2`, or `experiment3` folders and execute the cells.
-
-## License
-See the LICENSE file for details.
